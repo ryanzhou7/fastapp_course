@@ -1,5 +1,5 @@
 [
-  "We start from scratch to learn python/fastapi, etc... as if you just received a new computer. The first thing to do is to install python. Luckily, it is most likely already installed on your computer.",
+  "# Chapter 1 Python\nWe start from scratch to learn python/fastapi, etc... as if you just received a new computer. The first thing to do is to install python. Luckily, it is most likely already installed on your computer.",
   {
     "question": "From the terminal how do you check if python is installed and it's version?",
     "answer": {
@@ -61,10 +61,34 @@
         "A program that executes instructions written in a high-level programming language"
       ],
       "correct_choice_index": 3,
-      "explanation": "An interpreter directly executes instructions written in a high-level programming language, without requiring them to be compiled into machine code."
+      "explanation": "An interpreter directly executes instructions written in a high-level programming language."
     }
   },
-  "We'll see another interpreter in the next chapter (sh).",
+  "We can give interpreters instructions / code 1). one command at a time or 2). all at once as a script.",
+  {
+    "question": "Given the code `print('Hi')`, how do we give the python interpreter this code via one command at a time?",
+    "answer": {
+      "choices": [
+        "`$ python print('Hi')`",
+        "`$ python` then type `print('Hi')`",
+        "`$ python -c \"'print('Hi')'\"`",
+        "B and C"
+      ],
+      "correct_choice_index": 3
+    }
+  },
+  {
+    "question": "Given the code `print('Hi')`, how do we give the python interpreter this code via all at once as a script.?",
+    "answer": {
+      "choices": [
+        "You need to first setup a virtual environment",
+        "`$ python` then type `print('Hi')`",
+        "Create a file with the code and run `$ python file.py`",
+        "All of the above"
+      ],
+      "correct_choice_index": 2
+    }
+  },
   {
     "question": "Suppose python wasn't installed on your computer, how do we install it?",
     "answer": {
