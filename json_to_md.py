@@ -1,5 +1,6 @@
 import json
 import os
+import argparse
 
 def write_newlines(md_file, n):
     for _ in range(n):
@@ -17,13 +18,13 @@ def validate_and_convert_json_to_md(json_filename):
     for item in data:
         if isinstance(item, dict):
             if 'question' not in item or 'answer' not in item:
-                raise ValueError(f"Question {item} does not have 'question' and 'answer' attributes.")
+                raise ValueError(f"{item} does not have 'question' and 'answer' attributes.")
             if 'choices' not in item['answer'] or 'correct_choice_index' not in item['answer']:
-                raise ValueError("Each answer must have 'choices' and 'correct_choice_index'.")
+                raise ValueError(f"{item} must have 'choices' and 'correct_choice_index'.")
             if not isinstance(item['answer']['choices'], list) or len(item['answer']['choices']) != 4:
-                raise ValueError("Each 'choices' must be an array of 4 strings.")
+                raise ValueError(f"{item} 'choices' must be an array of 4 strings.")
         elif not isinstance(item, str):
-            raise ValueError("Each item in the array must be either a string or a question object.")
+            raise ValueError(f"{item} in the array must be either a string or a question object.")
     
     # Convert to Markdown
     md_filename = os.path.splitext(json_filename)[0] + '.md'
@@ -60,5 +61,8 @@ def validate_and_convert_json_to_md(json_filename):
                 md_file.write('</p>\n</details>\n\n---\n')
 
 
-# Example usage
-validate_and_convert_json_to_md('ch2_mise.json')
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description='Convert JSON to Markdown.')
+    parser.add_argument('json_filename', type=str, help='The JSON file to convert.')
+    args = parser.parse_args()
+    validate_and_convert_json_to_md(args.json_filename)
