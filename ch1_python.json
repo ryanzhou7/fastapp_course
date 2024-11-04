@@ -1,17 +1,16 @@
 [
-  "# Chapter 1 Python\n",
+  "# Chapter 1 Python",
   "We start from scratch to learn python/fastapi, etc... as if you just received a new computer. The first thing to do is to install python. Luckily, it is most likely already installed on your computer.",
   {
     "question": "From the terminal how do you check if python is installed and it's version?",
     "answer": {
       "choices": [
-        " `$ python -v`",
-        " `$ python --version`",
-        " `$ python -version`",
-        " `$ python -V`"
+        "`$ python -v`",
+        "`$ python --version`",
+        "`$ python -version`",
+        "`$ python -V`"
       ],
-      "correct_choice_index": 1,
-      "explanation": ""
+      "correct_choice_index": 1
     }
   },
   {
@@ -36,8 +35,7 @@
         "`$ locate python`",
         "`$ find python`"
       ],
-      "correct_choice_index": 0,
-      "explanation": ""
+      "correct_choice_index": 0
     }
   },
   {

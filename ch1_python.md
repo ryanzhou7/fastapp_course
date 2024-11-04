@@ -6,11 +6,10 @@ We start from scratch to learn python/fastapi, etc... as if you just received a 
 
 From the terminal how do you check if python is installed and it's version?
 
-- A:  `$ python -v`
-- B:  `$ python --version`
-- C:  `$ python -version`
-- D:  `$ python -V`
-
+- A: `$ python -v`
+- B: `$ python --version`
+- C: `$ python -version`
+- D: `$ python -V`
 
 <details><summary><b>Answer</b></summary>
 <p>
@@ -22,7 +21,6 @@ From the terminal how do you check if python is installed and it's version?
 
 ---
 
-
 ###### Question
 
 You will often see `$ python` and `$ python3`, whats the difference?
@@ -32,18 +30,17 @@ You will often see `$ python` and `$ python3`, whats the difference?
 - C: `$ python` refers to Python 2.x, `$ python3` refers to Python 3.x
 - D: `$ python` is for Windows, `$ python3` is for Unix-based systems
 
-
 <details><summary><b>Answer</b></summary>
 <p>
 
 #### Answer: C
 
 For simplicity we will use `$ python` to refer to Python 3.x in this guide.
+
 </p>
 </details>
 
 ---
-
 
 ###### Question
 
@@ -53,7 +50,6 @@ How do you determine the location of where the currently active python in your t
 - B: `$ where python`
 - C: `$ locate python`
 - D: `$ find python`
-
 
 <details><summary><b>Answer</b></summary>
 <p>
@@ -65,7 +61,6 @@ How do you determine the location of where the currently active python in your t
 
 ---
 
-
 ###### Question
 
 What happens when you run `$ python` ?
@@ -74,7 +69,6 @@ What happens when you run `$ python` ?
 - B: `$ python` opens the Python documentation
 - C: `$ python` starts the Python interpreter
 - D: `$ python` installs Python packages
-
 
 <details><summary><b>Answer</b></summary>
 <p>
@@ -86,7 +80,6 @@ What happens when you run `$ python` ?
 
 ---
 
-
 ###### Question
 
 What is an interpreter?
@@ -96,13 +89,13 @@ What is an interpreter?
 - C: A program that compiles code into an executable file
 - D: A program that executes instructions written in a high-level programming language
 
-
 <details><summary><b>Answer</b></summary>
 <p>
 
 #### Answer: D
 
 An interpreter directly executes instructions written in a high-level programming language.
+
 </p>
 </details>
 
@@ -119,7 +112,6 @@ Given the code `print('Hi')`, how do we give the python interpreter this code vi
 - C: `$ python -c "'print('Hi')'"`
 - D: B and C
 
-
 <details><summary><b>Answer</b></summary>
 <p>
 
@@ -130,7 +122,6 @@ Given the code `print('Hi')`, how do we give the python interpreter this code vi
 
 ---
 
-
 ###### Question
 
 Given the code `print('Hi')`, how do we give the python interpreter this code via all at once as a script.?
@@ -139,7 +130,6 @@ Given the code `print('Hi')`, how do we give the python interpreter this code vi
 - B: `$ python` then type `print('Hi')`
 - C: Create a file with the code and run `$ python file.py`
 - D: All of the above
-
 
 <details><summary><b>Answer</b></summary>
 <p>
@@ -151,16 +141,14 @@ Given the code `print('Hi')`, how do we give the python interpreter this code vi
 
 ---
 
-
 ###### Question
 
 Suppose python wasn't installed on your computer, how do we install it?
 
-- A:  Download from the official Python website
-- B:  Use a package manager like `$ apt` or `$ brew`
-- C:  Install from a third-party website
-- D:  All of the above
-
+- A: Download from the official Python website
+- B: Use a package manager like `$ apt` or `$ brew`
+- C: Install from a third-party website
+- D: All of the above
 
 <details><summary><b>Answer</b></summary>
 <p>
@@ -168,21 +156,20 @@ Suppose python wasn't installed on your computer, how do we install it?
 #### Answer: D
 
 All of these methods are valid depending on your OS. However, none of these methods of installation allow us to switch between python versions easily.
+
 </p>
 </details>
 
 ---
 
-
 ###### Question
 
 Why might we need to switch between python versions?
 
-- A:  Different projects may require different versions
-- B:  To test compatibility with different versions
-- C:  To use features available only in specific versions
-- D:  All of the above
-
+- A: Different projects may require different versions
+- B: To test compatibility with different versions
+- C: To use features available only in specific versions
+- D: All of the above
 
 <details><summary><b>Answer</b></summary>
 <p>
@@ -195,4 +182,3 @@ If you search for the tool to solve this problem you will most likely find [pyen
 </details>
 
 ---
-
