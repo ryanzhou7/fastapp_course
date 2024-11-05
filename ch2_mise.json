@@ -24,7 +24,7 @@
       "correct_choice_index": 1
     }
   },
-  "Now, the following might feel a bit like a tangent, but it is important because learning these commonly used unix commands is very helpful for backend server management / deployment / day to day use cases.",
+  "Now, the following might feel a bit like a tangent, but it is important because learning these commonly used unix commands is very helpful for backend server management / deployment scripts / day to day use cases.",
   {
     "question": "What does the `$ curl https://mise.run` do?",
     "answer": {
@@ -48,6 +48,99 @@
         "It saves the content of the file"
       ],
       "correct_choice_index": 0
+    }
+  },
+  "Let's try to pass code to the `$ sh` interpreter in the same two ways like we did with the python command. Create a file with `$ touch hi.sh` and add `echo 'Hi'` to it.",
+  {
+    "question": "How do we give the `$ sh` interpreter the code `echo 'Hi'` via all at once as a script?",
+    "answer": {
+      "choices": [
+        "You need to first setup a virtual environment",
+        "`$ sh` then type `echo 'Hi'`",
+        "`$ sh hi.sh`",
+        "A and C"
+      ],
+      "correct_choice_index": 2
+    }
+  },
+  {
+    "question": "How do we give the `$ sh` interpreter the code `echo 'Hi'` via one command at a time?",
+    "answer": {
+      "choices": [
+        "`$ sh` then type `echo 'Hi'`",
+        "`$ sh -c \"'echo 'Hi'\"`",
+        "`$ echo 'echo \"hi\"' | sh`",
+        "All of the above"
+      ],
+      "correct_choice_index": 3,
+      "explanation": "Though all of these work we want understand the `$ echo 'echo \"hi\"' | sh` the most. This is because it is a common pattern to pipe the output of one command to another command as `$ curl https://mise.run` | sh does. Why doesn't `$ echo 'hi' | sh` not work? The error you get is `sh: 1: hi: not found`. This is because echo outputs 'hi', which is not a valid command. Hence, we need to double echo"
+    }
+  },
+  "Now that we know `$ curl https://mise.run` downloads the content of the URL and outputs it, `|` passes the output to `$ sh`, which runs the commands. We see how `mise` is installed. Some code is given to the `sh` interpreter to run.",
+  {
+    "question": "The next step to install mise per it's [GitHub repository quick-start](https://github.com/jdx/mise?tab=readme-ov-file#quickstart) guide? is: Hook mise into your shell (pick the right one for your shell): ... which is the right choice?",
+    "answer": {
+      "choices": [
+        "`$ echo 'eval \"$(~/.local/bin/mise activate bash)\"' >> ~/.bashrc`",
+        "`$ echo 'eval \"$(~/.local/bin/mise activate zsh)\"' >> ~/.zshrc`",
+        "`$ echo ''~/.local/bin/mise activate fish | source'' >> ~/.config/fish/config.fish`",
+        "None of the above"
+      ],
+      "correct_choice_index": 1,
+      "explanation": "If you are on a macOS, `$ zsh` is set as your default shell."
+    }
+  },
+  "Let's go piece by piece to understand the`$ echo 'eval \"$(~/.local/bin/mise activate zsh)\"' >> ~/.zshrc` command",
+  {
+    "question": "What does the `>>` operator do in the command `$ echo 'eval \"$(~/.local/bin/mise activate zsh)\"' >> ~/.zshrc`?",
+    "answer": {
+      "choices": [
+        "It overwrites the content of the file",
+        "It appends the content to the file",
+        "It creates a new file",
+        "It deletes the file"
+      ],
+      "correct_choice_index": 1,
+      "explanation": "The `>>` operator appends the content to the file, while `>` would overwrite the file."
+    }
+  },
+  {
+    "question": "What does the `~` symbol represent in the command `$ echo 'eval \"$(~/.local/bin/mise activate zsh)\"' >> ~/.zshrc`?",
+    "answer": {
+      "choices": [
+        "The root directory",
+        "The current directory",
+        "The home directory",
+        "The previous directory"
+      ],
+      "correct_choice_index": 2,
+      "explanation": "The `~` symbol represents the home directory of the current user."
+    }
+  },
+  {
+    "question": "What is the purpose of the `.zshrc` file?",
+    "answer": {
+      "choices": [
+        "It is a configuration file for the bash shell",
+        "It is a configuration file for the zsh shell",
+        "It is a configuration file for the fish shell",
+        "It is a configuration file for the sh shell"
+      ],
+      "correct_choice_index": 1,
+      "explanation": "The `.zshrc` file is a configuration file for the zsh shell, where you can set environment variables, aliases, and other settings."
+    }
+  },
+  {
+    "question": "How do you add a command to the `.zshrc` file to see that it is run on every new terminal?",
+    "answer": {
+      "choices": [
+        "`$ echo 'echo \"hi\"' >> ~/.zshrc`",
+        "`$ echo 'echo \"hi\"' > ~/.zshrc`",
+        "`$ echo 'echo \"hi\"' | ~/.zshrc`",
+        "`$ echo 'echo \"hi\"' < ~/.zshrc`"
+      ],
+      "correct_choice_index": 0,
+      "explanation": "The `>>` operator appends the command `echo 'hi'` to the `.zshrc` file, so it will be executed every time a new terminal is opened."
     }
   }
 ]

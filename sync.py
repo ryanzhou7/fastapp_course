@@ -86,9 +86,7 @@ def convert_md_to_json(md_filename):
         choices = []
         line = file.readline()
         while is_choice(line):
-          print(line)
           choice = line.split(": ")[1].strip()
-          print(choice)
           choices.append(choice)
           line = file.readline()
         while not line.startswith("#### Answer:"):
