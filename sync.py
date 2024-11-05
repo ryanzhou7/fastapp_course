@@ -82,10 +82,14 @@ def convert_md_to_json(md_filename):
     line = file.readline()
     while line:
       if line.startswith('###### Question'):
-        question_content = file.readline()
+        question_content = file.readline().strip()
         choices = []
+        line = file.readline()
         while is_choice(line):
-          choices.append(line.split(": ")[-1])
+          print(line)
+          choice = line.split(": ")[1].strip()
+          print(choice)
+          choices.append(choice)
           line = file.readline()
         while not line.startswith("#### Answer:"):
           line = file.readline()
@@ -97,17 +101,20 @@ def convert_md_to_json(md_filename):
           "correct_choice_index": correct_index
         }
         if not line.startswith("</p>"):
-          answer["explanation"] = line
+          answer["explanation"] = line.strip()
         data.append({
           "question": question_content,
           "answer": answer
         })
-      else:
-        data.append(line)
+        while not line.startswith('---'):
+          line = file.readline()
         line = file.readline()
-    json_filename = md_filename.replace('.md', '.json')
-    with open(json_filename, 'w') as json_file:
-        json.dump(data, json_file, indent=4)
+      else:
+        data.append(line.strip())
+        line = file.readline()
+  json_filename = md_filename.replace('.md', '.json')
+  with open(json_filename, 'w') as json_file:
+    json.dump(data, json_file, indent=2)
 
 # Example usage
 convert_md_to_json('ch1_python.md')
