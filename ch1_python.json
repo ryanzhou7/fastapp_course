@@ -92,10 +92,10 @@
     "question": "Suppose python wasn't installed on your computer, how do we install it?",
     "answer": {
       "choices": [
-        " Download from the official Python website",
-        " Use a package manager like `$ apt` or `$ brew`",
-        " Install from a third-party website",
-        " All of the above"
+        "Download from the official Python website",
+        "Use a package manager like `$ apt` or `$ brew`",
+        "Install from a third-party website",
+        "All of the above"
       ],
       "correct_choice_index": 3,
       "explanation": "All of these methods are valid depending on your OS. However, none of these methods of installation allow us to switch between python versions easily."
@@ -105,10 +105,10 @@
     "question": "Why might we need to switch between python versions?",
     "answer": {
       "choices": [
-        " Different projects may require different versions",
-        " To test compatibility with different versions",
-        " To use features available only in specific versions",
-        " All of the above"
+        "Different projects may require different versions",
+        "To test compatibility with different versions",
+        "To use features available only in specific versions",
+        "All of the above"
       ],
       "correct_choice_index": 3,
       "explanation": "If you search for the tool to solve this problem you will most likely find [pyenv](https://github.com/pyenv/pyenv) which is very popular and well regarded. But [mise](https://github.com/jdx/mise?tab=readme-ov-file#what-is-it) is a better choice as it is a lightning fast, more general tool that can manage multiple languages and tools, which we'll see next.\n"

@@ -1,6 +1,7 @@
 import json
 import os
 import argparse
+import tempfile
 
 def write_newlines(md_file, n):
     for _ in range(n):
@@ -9,6 +10,15 @@ def write_newlines(md_file, n):
 def write_question_bookend(md_file):
     md_file.write('---\n\n')
 
+def create_temp_file_without_newlines(md_filename):
+    with open(md_filename, 'r') as md_file:
+        content = md_file.read().replace('\n\n', '\n')
+
+    temp_file = tempfile.NamedTemporaryFile(delete=False, mode='w')
+    temp_file.write(content)
+    temp_file.close()
+    return temp_file.name
+  
 def validate_and_convert_json_to_md(json_filename):
     # Load and validate JSON
     with open(json_filename, 'r') as file:
@@ -60,68 +70,47 @@ def validate_and_convert_json_to_md(json_filename):
                 md_file.write('</p>\n</details>')
                 write_newlines(md_file, 2)
                 write_question_bookend(md_file)
+
+def is_choice(line: str) -> bool:
+    return line.startswith("- ")
+
 def convert_md_to_json(md_filename):
-    with open(md_filename, 'r') as md_file:
-        lines = md_file.readlines()
-    
+  
+  filename = create_temp_file_without_newlines(md_filename)
+  with open(filename, 'r') as file:
     data = []
-    question = None
-    choices = []
-    correct_choice_index = None
-    explanation = None
-    non_question_text = []
-
-    for line in lines:
-        line = line.strip()
-        if line.startswith('###### Question'):
-            if question and choices:
-                data.append({
-                    'question': question,
-                    'answer': {
-                        'choices': choices,
-                        'correct_choice_index': correct_choice_index,
-                        'explanation': explanation
-                    }
-                })
-            question = None
-            choices = []
-            correct_choice_index = None
-            explanation = None
-            if non_question_text:
-                data.append("\n".join(non_question_text))
-                non_question_text = []
-        elif line.startswith('- '):
-            choices.append(line[3:].strip())
-        elif line.startswith('#### Answer:'):
-            correct_choice = line.split(': ')[1].strip()
-            correct_choice_index = ord(correct_choice) - ord('A')
-        elif line.startswith('<details><summary><b>Answer</b></summary>'):
-            explanation = ""
-        elif line.startswith('</p></details>'):
-            explanation = explanation.strip()
-        elif explanation is not None:
-            explanation += line + "\n"
-        elif not question:
-            question = line
-        else:
-            non_question_text.append(line)
-
-    if question and choices:
+    line = file.readline()
+    while line:
+      if line.startswith('###### Question'):
+        question_content = file.readline()
+        choices = []
+        while is_choice(line):
+          choices.append(line.split(": ")[-1])
+          line = file.readline()
+        while not line.startswith("#### Answer:"):
+          line = file.readline()
+        letter_choice = line.split(": ")[1].strip()
+        correct_index = ord(letter_choice) - ord('A')
+        line = file.readline()
+        answer = {
+          "choices": choices,
+          "correct_choice_index": correct_index
+        }
+        if not line.startswith("</p>"):
+          answer["explanation"] = line
         data.append({
-            'question': question,
-            'answer': {
-                'choices': choices,
-                'correct_choice_index': correct_choice_index,
-                'explanation': explanation
-            }
+          "question": question_content,
+          "answer": answer
         })
-    if non_question_text:
-        data.append("\n".join(non_question_text))
-    
+      else:
+        data.append(line)
+        line = file.readline()
     json_filename = md_filename.replace('.md', '.json')
     with open(json_filename, 'w') as json_file:
         json.dump(data, json_file, indent=4)
 
+# Example usage
+convert_md_to_json('ch1_python.md')
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Convert between JSON and Markdown.')
     parser.add_argument('filename', type=str, help='The file to convert.')
