@@ -142,15 +142,59 @@ If you are on a macOS, `$ zsh` is set as your default shell.
 
 ---
 
-Let's go piece by piece to understand the`$ echo 'eval "$(~/.local/bin/mise activate zsh)"' >> ~/.zshrc` command
+Let's go piece by piece to understand the`$ echo 'eval "$(~/.local/bin/mise activate zsh)"' >> ~/.zshrc` command. Starting with `$ eval`, an built-in shell command that takes a string as an argument and evaluates it as if it were a command
 
 ###### Question
 
-What does the `>>` operator do in the command `$ echo 'eval "$(~/.local/bin/mise activate zsh)"' >> ~/.zshrc`?
+Which is the simplest, correct usage of the `eval` command?
+
+- A: `$ eval $(echo echo 'hi')`
+- B: `$ eval 'hi'`
+- C: `$ eval $(echo 'hi')`
+- D: `$ eval echo 'hi'`
+
+<details><summary><b>Answer</b></summary>
+<p>
+
+#### Answer: D
+
+Even though `$ eval $(echo echo 'hi')` also works, it is not the simplest usage of the `eval` command.
+</p>
+</details>
+
+---
+
+For `$(...)`: This is command substitution. It runs the command inside the parentheses and replaces the $(...) with the output of that command
+
+###### Question
+
+What is the simplest correct usage of the `$(...)` syntax?
+
+- A: `$ $(ls)`
+- B: `$ $(pwd)`
+- C: `$ echo $(echo 'hi')`
+- D: `$ echo $(cd)`
+
+<details><summary><b>Answer</b></summary>
+<p>
+
+#### Answer: C
+
+Though some of these may not give you errors, `$ echo $(echo 'hi')` as we know the evaluation of echo 'hi' is 'hi', so then we have `$ echo 'hi', which prints 'hi'.
+</p>
+</details>
+
+---
+
+We will not cover `$(~/.local/bin/mise activate zsh)` but know that it will output some valid command to be evaluated. That evaluate is a string as that is what echo expects. Now, we had simplify it to `$ echo 'some string...' >> ~/.zshrc`?. Let's test what the `>>` operator does.
+
+###### Question
+
+What does `$ echo 'test1' >> test.txt` do?
 
 - A: It overwrites the content of the file
 - B: It appends the content to the file
-- C: It creates a new file
+- C: It creates a new file and writes 'test1' to it
 - D: It deletes the file
 
 <details><summary><b>Answer</b></summary>
@@ -158,7 +202,7 @@ What does the `>>` operator do in the command `$ echo 'eval "$(~/.local/bin/mise
 
 #### Answer: B
 
-The `>>` operator appends the content to the file, while `>` would overwrite the file.
+The `>>` operator appends the content to the file. If the file does not exist, it creates a new file and writes 'test1' to it.
 </p>
 </details>
 
@@ -166,19 +210,19 @@ The `>>` operator appends the content to the file, while `>` would overwrite the
 
 ###### Question
 
-What does the `~` symbol represent in the command `$ echo 'eval "$(~/.local/bin/mise activate zsh)"' >> ~/.zshrc`?
+What is the ultimate result of running `$ echo 'eval "$(~/.local/bin/mise activate zsh)"' >> ~/.zshrc`?
 
-- A: The root directory
-- B: The current directory
-- C: The home directory
-- D: The previous directory
+- A: It overwrites the `.zshrc` file with the `mise` activation command
+- B: It appends the `mise` activation command to the `.zshrc` file
+- C: It creates a new `.zshrc` file with the `mise` activation command
+- D: It deletes the `.zshrc` file
 
 <details><summary><b>Answer</b></summary>
 <p>
 
-#### Answer: C
+#### Answer: B
 
-The `~` symbol represents the home directory of the current user.
+The `>>` operator appends the `mise` activation command to the `.zshrc` file. This ensures that the `mise` environment is activated every time a new terminal session is started.
 </p>
 </details>
 
@@ -198,7 +242,7 @@ What is the purpose of the `.zshrc` file?
 
 #### Answer: B
 
-The `.zshrc` file is a configuration file for the zsh shell, where you can set environment variables, aliases, and other settings.
+The `.zshrc` file is a configuration file for the zsh shell, where you can set environment variables, aliases, and other settings. Basically, it is a script that runs every time a new terminal session is started.
 </p>
 </details>
 
@@ -206,21 +250,23 @@ The `.zshrc` file is a configuration file for the zsh shell, where you can set e
 
 ###### Question
 
-How do you add a command to the `.zshrc` file to see that it is run on every new terminal?
+DO NOT TEST OUT ALL OF THESE COMMANDS AS some may delete your configuration file. How do you ensure 'hi' prints every time a new terminal is opened?
 
-- A: `$ echo 'echo "hi"' >> ~/.zshrc`
-- B: `$ echo 'echo "hi"' > ~/.zshrc`
-- C: `$ echo 'echo "hi"' | ~/.zshrc`
-- D: `$ echo 'echo "hi"' < ~/.zshrc`
+- A: `$ echo 'echo "hi"' > ~/.zshrc`
+- B: `$ echo 'echo "hi"' | ~/.zshrc`
+- C: `$ echo 'echo "hi"' < ~/.zshrc`
+- D: `$ echo 'echo "hi"' >> ~/.zshrc`
 
 <details><summary><b>Answer</b></summary>
 <p>
 
-#### Answer: A
+#### Answer: D
 
-The `>>` operator appends the command `echo 'hi'` to the `.zshrc` file, so it will be executed every time a new terminal is opened.
+The `>>` operator appends the command `echo 'hi'` to the `.zshrc` file, so it will be executed every time a new terminal is opened. The dangerous command is >, which overwrites the file. You can test this out with a simple command like `$ echo 'echo "hi"' > test.txt` then `$ cat test.txt` to see the contents, then `$ echo 'echo "bye"' > test.txt`
 </p>
 </details>
 
 ---
+
+Finish your mise installation, in the next chapter we will begin using it
 
