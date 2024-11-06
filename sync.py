@@ -114,8 +114,6 @@ def convert_md_to_json(md_filename):
   with open(json_filename, 'w') as json_file:
     json.dump(data, json_file, indent=2)
 
-# Example usage
-convert_md_to_json('ch1_python.md')
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Convert between JSON and Markdown.')
     parser.add_argument('filename', type=str, help='The file to convert.')
