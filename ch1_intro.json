@@ -1,5 +1,5 @@
 [
-  "# Chapter 1 Python",
+  "# Chapter 1. The python interpreter",
   "We learn by starting from scratch, as if you just received a new computer. The first thing to do is to install python. Luckily, it is most likely already installed on your computer.",
   {
     "question": "From the terminal how do you check if python is installed and it's version?",
