@@ -1,1 +1,41 @@
-["# Chapter 3. Mise - finally!"]
+[
+  "# Chapter 3. Mise - finally!",
+  {
+    "question": "What's the fastest way to learn how to use mise?",
+    "answer": {
+      "choices": [
+        "Read the official documentation",
+        "Watch tutorial videos",
+        "$ `mise --help`",
+        "Utilize copilot"
+      ],
+      "correct_choice_index": 2,
+      "explanation": " --help is a common flag for most command line tools to get a quick overview of the commands available."
+    }
+  },
+  {
+    "question": "What's the command to install python 3.11 in mise?",
+    "answer": {
+      "choices": [
+        "`mise install python@3.11`",
+        "`mise add python@3.11`",
+        "`mise setup python@3.11`",
+        "`mise get python@3.11`"
+      ],
+      "correct_choice_index": 0
+    }
+  },
+  "Install python 3.11 with mise",
+  {
+    "question": "What's the command to use python 3.11 in mise in the current project?",
+    "answer": {
+      "choices": [
+        "`mise activate python@3.11`",
+        "`mise use python@3.11`",
+        "`mise set python@3.11`",
+        "`mise switch python@3.11`"
+      ],
+      "correct_choice_index": 2
+    }
+  }
+]
