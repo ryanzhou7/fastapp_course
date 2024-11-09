@@ -4,23 +4,27 @@
 
 We will use the [FastAPI-template](https://github.com/s3rius/FastAPI-template) tool to generate our project.
 
-## Poetry setup
+### Poetry setup
 
 To use this, we need to install poetry.
 
 Poetry is like npm but for python, it has several features that pip doesn't have, install it per the [guide here](https://python-poetry.org/docs/#installing-with-pipx).
 
-First, [install pipx](https://pipx.pypa.io/stable/installation/) via `$ brew install pipx && pipx ensurepath`. Then, `$ pipx install poetry`.
+First, [install pipx](https://pipx.pypa.io/stable/installation/) via `$ brew install pipx && pipx ensurepath`.
 
-## `fastapi_template` setup
+Then, `$ pipx install poetry`.
 
-Now that you installed poetry with pipx, install fastapi_template with `pipx install fastapi_template` and verify
+### fastapi_template setup
+
+Now that you installed poetry with pipx, install `fastapi_template` with `pipx install fastapi_template` and verify
 
 `$ fastapi_template --version`
 
-## Initial project creation
+## Configuration 1.
 
-To create our project, run
+You are ready to create the project now.
+
+To create our project, with the most simple settings:
 
 `$ fastapi_template -n fastapp --quiet --api-type rest --db none --orm none --ci none`
 
@@ -28,7 +32,7 @@ Explanation of flags used
 
 - `-n fastapp`: Project name
 - `--quiet`: don't ask me questions for extra options
-- `--api-type rest`: this is for a restful api
+- `--api-type rest`: this is for a restful api (as opposed to graphql)
 - `--db none`: don't add a database
 - `--orm none`: don't add an ORM like sqlalchemy
 - `--ci none`: don't add continuous integration like github actions
@@ -39,11 +43,17 @@ If you see
 
 This is fine to ignore.
 
-Open this folder with Vscode.
+You can also run `$ fastapi_template --help` to see the other options we will add.
 
-This is the simplest version of the project we can generate, but it is still a lot of new code. Hence, this will be the most difficult. All subsequent generations with additional options will much be easier to understand.
+Open this folder with VScode.
 
-## Github repo setup
+This is the simplest version of the project we can generate, but it is still a lot of new code.
+
+Hence, this will be the most difficult.
+
+All subsequent generations with additional options will be much be easier to understand.
+
+### Github repo setup
 
 On github create a new repo called `fastapp`, do not add a readme, .gitignore, or any other files.
 
@@ -59,26 +69,26 @@ git init
 git add README.md
 git commit -m "first commit"
 git branch -M main
-git remote add origin https://github.com/sophie-tsai/fastapp.git
+git remote add origin https://github.com/<YOUR_USER_NAME>/fastapp.git
 git push -u origin main
 ```
 
 `$ cd fastapp` (what fastapi_template created)
 
-Now run only these commands to push the code up
+Now run only these commands to push the code up. Don't forget to replace `<YOUR_USER_NAME>`
 
 ```bash
 git init
 git add -A
 git commit -m "first commit"
 git branch -M main
-git remote add origin https://github.com/sophie-tsai/fastapp.git
+git remote add origin https://github.com/<YOUR_USER_NAME>/fastapp.git
 git push -u origin main
 ```
 
-## Python version selection
+### Python version selection
 
-Like with most repos, start with reading the README.md at the repo root. Return here after you finish reading the section of "Poetry" (but don't execute those commands).
+Like with most repos, start with reading the `README.md` file at the repo root. Return here after you finish reading the section of "Poetry" (but don't execute those commands).
 
 It tells you to run the projects with these commands.
 
@@ -98,24 +108,26 @@ FROM python:3.11.4-slim-bullseye as prod
 
 This dockerfile is how the app will run in prod, so it'd be ideal for our local dev environment to match it as close as possible.
 
-Use mise to use python 3.11 for this project. `> 3.11` versions such as `3.11.15` is fine even though it says `3.11.4`. The `X` of `3.11.X` means that there are bug fixes and no breaking changes.
+We will learn about this Dockerfile later on.
 
-`$ python3 --version`
+Use mise to use python 3.11 for this project. Patch version above `> 3.11` versions such as `3.11.15` is fine even though the Dockerfile says `python:3.11.4-slim-bullseye`. The `X` of `3.11.X` means that there are bug fixes and no breaking changes.
+
+Check your version: `$ python3 --version`
 
 If this doesn't match `3.11` you can run `source ~/.zshrc` (which reloads the configuration file) then try again, or open a new terminal tab.
 
-## Project installation
+### Project installation
 
-Once your python version is correct, follow it's instructions for installation, so...
+Once your python version is correct, return to the repo `README.md` to follow it's installation instructions:
 
 ```bash
 poetry install
 poetry run python -m fastapp
 ```
 
-In the browser `http://127.0.0.1:8000/api/docs` should show you swagger docs.
+In the browser [http://127.0.0.1:8000/api/docs](http://127.0.0.1:8000/api/docs) should show you swagger docs.
 
-## Poetry vs pip
+### Poetry vs pip
 
 Let's learn a little more about poetry
 
@@ -123,30 +135,30 @@ Let's learn a little more about poetry
 
 Compare and contrast pip and poetry below
 
-| Pip command                                          | Poetry command                                     |
-| ---------------------------------------------------- | -------------------------------------------------- |
-| `python3 -m venv env # create a virtual environment` | Not needed                                         |
-| `source env/bin/activate # activate it`              | Not needed, but most similar is `poetry shell`     |
-| `pip list # show installed libs`                     | `poetry show`                                      |
-| `pip install -r requirements.txt # install all recs` | `poetry install # install all recs in poetry.lock` |
-| `pip install fastapi # install one lib`              | `poetry add fastapi`                               |
-| `which python # points to the activate venv`         | `poetry run which python`                          |
+| Pip command                                             | Poetry command                                     |
+| ------------------------------------------------------- | -------------------------------------------------- |
+| `python3 -m venv env # create a virtual environment`    | Not needed, but most similar is `poetry install`   |
+| `source env/bin/activate # activate it`                 | Not needed, but most similar is `poetry shell`     |
+| `pip list # show installed libs`                        | `poetry show`                                      |
+| `pip install -r requirements.txt # install all recs`    | `poetry install # install all recs in poetry.lock` |
+| `pip install fastapi # install one lib`                 | `poetry add fastapi`                               |
+| `which python # points to the py in the activated venv` | `poetry run which python`                          |
 
 The above table is sorted by `pip` commands you'd typically run from top to bottom. If you run the poetry commands in the same order, you will get errors because the poetry workflow is...
 
 ```bash
-poetry install # create a virtual environment if one doesn't already exist
-poetry show # all installed
+poetry install # create a virtual environment if one doesn't already exist and install all recs in poetry.lock
+poetry show # show all installed
 
 # you'll see that the venv is not in the repo root, but this is fine
 poetry run which python # Note the location
 
 # starts a shell for which we are in the virtual environment poetry
 poetry shell
-which python # matches the location above, we don't need to preface with $ poetry run anymore
+which python # matches the location above, we don't need to preface with $ poetry run anymore in the activate shell
 ```
 
-## Return to README.md
+### Return to README.md
 
 Return to `README.md` of the project.
 
@@ -154,7 +166,7 @@ Return to `README.md` of the project.
 - Give "Project structure" a glance, not to understand all of this now, but to note that it can be used as a reference
 - Read "Configuration", then return here
 
-## Fast reload
+### Fast reload
 
 You currently have
 
@@ -172,19 +184,24 @@ Then make this change
     # ...
     # Main router for the API.
     app.include_router(router=api_router, prefix="/api")
-    print("changed")
+    print("changed") # Add this
     return app
 ```
 
-However, there are exceptions...
+You'd expect to see the print and it should
+
+However, there are exceptions to which files hot reload applies to.
 
 Right now `http://localhost:8000/api/docs` should work.
 
 Make this change and save the file
 
 ```python
+# fastapp/settings.py
+    # ...
     host: str = "127.0.0.1"
     port: int = 8001 # previously 8000
+    # ...
 ```
 
 In the terminal did you see:
@@ -193,25 +210,33 @@ In the terminal did you see:
 
 Does `http://localhost:8000/api/docs` still work? It should.
 
+That is unexpected right? We changed the port from 8000 -> 8001.
+
 Use control + c to kill the python command and run the app again.
 
 Now `http://localhost:8000/api/docs` shouldn't work, but `http://localhost:8001/api/docs` does.
 
 So, there are limitations to the auto-reload. But luckily, they are mostly edges cases.
 
+The app does run on `8001` because fast reload is not smart enough to kill the app and restart it.
+
 Test to see if `__main__.py` is also an edge case.
 
-## Debugger setup
+Solution: It is
+
+### Debugger setup
 
 We will now see the sequence of execution when we run the app.
 
 We can add print statements, but it is easier / faster via the debugger.
 
+Plus, setting up a debugger is extremely useful, you can pause execution and see local variables.
+
 First find out the poetry virtual environment path with `$ poetry run which python`
 
-For example. `/Users/ryanzhouOld/Library/Caches/pypoetry/virtualenvs/fastapp-ZkIpIdmY-py3.10/bin/python`
+For example. `/Users/<YOUR_USER>/Library/Caches/pypoetry/virtualenvs/fastapp-ZkIpIdmY-py3.10/bin/python`
 
-Create a `.vscode` directory add the following files
+Create a `.vscode` directory at the repo root add the following files
 
 ```json
 // settings.json
@@ -252,7 +277,7 @@ Look at the middle top for 6 buttons, which are:
 | Restart   | ⭕️  |
 | Stop      | ⏹    |
 
-## Debugger breakpoints
+### Debugger breakpoints
 
 Open `__main__.py` and click just left of the line numbers in line 1.
 
@@ -264,9 +289,13 @@ Now we can see the first file that gets executed when we run the app.
 
 Restart the debugger. Play around with the action buttons until you understand what each does.
 
-## Execution sequence
+### Execution sequence
 
-The execution sequence is as follows
+This will be a long and complicate section, but it is import and will be worth it.
+
+We will now go through each step of the execution sequence and get familiar with the files while we're at it.
+
+Execution sequence is colloquially defined as, "where in the code are we currently at?"
 
 1. We run `$ poetry run python -m fastapp`
 
@@ -282,7 +311,14 @@ The execution sequence is as follows
 
 - `__main__.py` is a special name, it defines the entry point for the package when it is executed as a script.
 - Since we ran with the `-m` flag command, Python looks for a `__main__.py` file within the package directory and executes it. This allows you to define what should happen when the package is run directly.
-- The file is copied below
+
+Now, we wil look at the files in detail. The step numbers (1. 2. 3.) still apply.
+
+To be accurate to the execution sequence, we will have to have jump between files.
+
+Fortunately, this will be noted. i.e. Now find step "# 15.".
+
+Now, look for "# 4."
 
 ```python
 # fastapp/__main__.py
@@ -290,7 +326,7 @@ The execution sequence is as follows
 # 4. This import uvicorn is run
 import uvicorn
 
-# 5. We import this file (see far below and then return here)
+# 5. We import this file, find "# 6."
 from fastapp.settings import settings
 
 # 8. This code is defined
@@ -298,8 +334,8 @@ def main() -> None:
     """Entrypoint of the application."""
     # 10. we call this method
     uvicorn.run(
-        # 11. We have reference the fastapp module, fastapp/__init__.py is called again
-        # see far far below
+        # 11. We have referenced the fastapp module, fastapp/__init__.py is called again
+        # find "# 12."
         "fastapp.web.application:get_app",
         workers=settings.workers_count,
         host=settings.host,
@@ -312,8 +348,8 @@ def main() -> None:
     # So unless a shutdown is signaled, this method never returns
     # Look for "23. "
 
-# 9. Determines whether a Python script is being run as the main program or
-# being imported as a module in another script.
+# 9. if statement below determines whether a Python script is being run as
+# the main program or being imported as a module in another script.
 if __name__ == "__main__":
     # this code will execute because this is run as a main program
     main()
@@ -335,8 +371,8 @@ class Settings(BaseSettings):
     reload: bool = False
     # ...
 
-    # 8. At first the value of reload is False, but this code says
-    # there is an .env file which it's prefix variables must be "FASTAPP_"
+    # 8. At first the value of reload is False (above), but this code says
+    # there is an .env file and read in variables with prefix "FASTAPP_"
     # after we read in this file (below), it overrides the above value as True
     """
     # .env file
@@ -354,9 +390,9 @@ settings = Settings()
 
 ```python
 # fastapp/web/application.py
-
+# 12.
 # Remember, this was imported via "fastapp.web.application:get_app"
-# So actually 12. is that web/__init__.py is executed
+# So actually # 12. is that web/__init__.py is executed but won't go into details there
 
 # 13. These are lib import which are executed, but we disregard
 from importlib import metadata
@@ -365,11 +401,12 @@ from fastapi import FastAPI
 from fastapi.responses import UJSONResponse
 
 # 14. You know the drill by know...
-# api is a module, it's __init__.py is executed
-# 15. The code of the router.py file is executed, etc...
+# api is a module, it's __init__.py is executed, etc...
 from fastapp.web.api.router import api_router
+                    # 15. The code of the router.py file is executed, etc...
+                    # continue below
 
-# lifespan_setup.py is a file we have created, won't go into the __init__.py
+# lifespan_setup.py is a file we have created, continue below
 from fastapp.web.lifespan import lifespan_setup
 
 def get_app() -> FastAPI:
@@ -386,7 +423,8 @@ def get_app() -> FastAPI:
         # 17. This are run argument by argument
         title="fastapp",
         version=metadata.version("fastapp"),
-        # 18. This is worth looking deeper into (see far below)
+        # 18. This is worth looking deeper into (see method lifespan_setup below)
+        # BUT, this method is not actually run yet
         lifespan=lifespan_setup,
         docs_url="/api/docs",
         redoc_url="/api/redoc",
@@ -399,7 +437,7 @@ def get_app() -> FastAPI:
 
     return app
     # 19. After the app is returned it's ready to start up, so look for "20. "
-    # 22. we're back in # fastapp/__main__.py, look for "23. "
+    # 21. we're back in # fastapp/__main__.py, look for "22. "
 ```
 
 ```python
@@ -434,7 +472,7 @@ async def lifespan_setup(
     print("App has shutdown")
 ```
 
-## Execution sequence summary
+### Execution sequence summary
 
 This summary is accurate as of now. As soon as imports change, it will not be.
 
@@ -466,7 +504,7 @@ Steps have been simplified and omitted
 
 That sequence was very complicated, but understanding is key as we add code to various portions of these steps.
 
-## Health router sequence
+### Health router sequence
 
 Here's an easy execution sequence trace
 
@@ -491,3 +529,5 @@ def health_check() -> None:
 ```
 
 When we do so the print is executed and we return from the method. None of the steps above come into play.
+
+## Configuration 2.
